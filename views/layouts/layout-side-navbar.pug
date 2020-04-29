@@ -1,0 +1,122 @@
+
+ul.navbar-nav.bg-gradient-primary.sidebar.sidebar-dark.accordion(id="accordionSidebar")
+
+    //- Sidebar - Brand 
+    a.sidebar-brand.d-flex.align-items-center.justify-content-center(href="/")
+        .sidebar-brand-icon.rotate-n-15
+            i.fas.fa-clipboard
+        .sidebar-brand-text.mx-3 
+            = programName 
+            sup #{ver}
+            
+    //- if not logged in. Redundant safety
+    if user
+        //- Divider 
+        hr.sidebar-divider.my-0
+
+        //- Nav Item - Dashboard 
+        li.nav-item.active
+            a.nav-link(href="/")
+                i.fas.fa-fw.fa-tachometer-alt
+                span Your Dashboard
+
+        //- Admin mode addon        
+        if user
+            if user.username == "admin" 
+                .sidebar-heading Admin Tools
+
+                li.nav-item.bg-info
+                    a.nav-link(href="/admin")
+                        i.fas.fa-star
+                        span
+                            b Admin
+
+        //- Crisis mode addon
+        if crisis
+            li.nav-item.bg-danger
+                a.nav-link(href="/")
+                    i.fas.fa-house-damage
+                    span
+                        b Crisis Dashboard
+
+        //- Core pages
+        .sidebar-heading Core Pages
+        
+        li.nav-item
+            a.nav-link.collapsed(href="#" data-toggle="collapse" data-target="#collapseTwoTwoTwo" aria-expanded="true" aria-controls="collapseTwoTwoTwo")
+                i.fas.fa-fw.fa-cog
+                span Report Pages
+            .collapse(id="collapseTwoTwoTwo" aria-labelledby="headingTwoTwoTwo" data-parent="#accordionSidebar")
+                .bg-white.py-2.collapse-inner.rounded
+                    h6.collapse-header Hub pages:
+                    a.collapse-item(href="#") Intelligence
+                    a.collapse-item(href="#") Recon and Surveillance
+
+        li.nav-item
+            a.nav-link.collapsed(href="#" data-toggle="collapse" data-target="#collapseTwoTwo" aria-expanded="true" aria-controls="collapseTwoTwo")
+                i.fas.fa-fw.fa-cog
+                span 311 Pages
+            .collapse(id="collapseTwoTwo" aria-labelledby="headingTwoTwo" data-parent="#accordionSidebar")
+                .bg-white.py-2.collapse-inner.rounded
+                    h6.collapse-header 311 Reporting pages:
+                    a.collapse-item(href="#") New 311 Report
+                    a.collapse-item(href="#") Browse 311 Topics
+                    a.collapse-item(href="#") Browse 311 Endpoints
+
+        //- Divider 
+        hr.sidebar-divider
+
+        //- Heading 
+        .sidebar-heading User Account
+
+        li.nav-item
+            a.nav-link(href="#")
+                i.fas.fa-fw.fa-star
+                span Rewards            
+
+        //- Nav Item - Pages Collapse Menu 
+        li.nav-item
+            a.nav-link.collapsed(href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo")
+                i.fas.fa-fw.fa-cog
+                span Settings
+            .collapse(id="collapseTwo" aria-labelledby="headingTwo" data-parent="#accordionSidebar")
+                .bg-white.py-2.collapse-inner.rounded
+                    h6.collapse-header Settings:
+                    a.collapse-item(href="#") Profile
+                    a.collapse-item(href="#") Access Control
+                    a.collapse-item(href="#") Membership
+
+        //- Divider 
+        hr.sidebar-divider
+
+        //- Heading 
+        .sidebar-heading City Developer Tools
+
+
+        li.nav-item
+            a.nav-link(href="#")
+                i.fas.fa-fw.fa-star
+                span C2 Dashboard
+
+        li.nav-item
+            a.nav-link(href="#")
+                i.fas.fa-fw.fa-chart-area
+                span Planning
+
+        li.nav-item
+            a.nav-link(href="#")
+                i.fas.fa-fw.fa-table
+                span Asset List
+    else
+        li.nav-item
+            a.nav-link(href="/login")
+                span
+                    p Please Login to access the website content
+
+    
+    //- Divider 
+    hr.sidebar-divider.d-none.d-md-block
+
+    //- Sidebar Toggler (Sidebar) 
+    .text-center.d-none.d-md-inline
+        button.rounded-circle.border-0(id="sidebarToggle")

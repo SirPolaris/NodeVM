@@ -1,0 +1,117 @@
+
+nav.navbar.navbar-expand.navbar-light.bg-white.topbar.mb-4.static-top.shadow
+
+    //- Sidebar Toggle (Topbar) 
+    button.btn.btn-link.d-md-none.rounded-circle.mr-3(id="sidebarToggleTop")
+        i.fa.fa-bars
+
+    //- Topbar Search 
+    form.d-none.d-sm-inline-block.form-inline.mr-auto.ml-md-3.my-2.my-md-0.mw-100.navbar-search
+        .input-group
+            input.form-control.bg-light.border-0.small(type="text" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2")
+            .input-group-append
+                button.btn.btn-primary(type="button")
+                    i.fas.fa-search.fa-sm
+    
+    //- Topbar Navbar 
+    ul.navbar-nav.ml-auto
+
+        //- Nav Item - Search Dropdown (Visible Only XS) 
+        li.nav-item.dropdown.no-arrow.d-sm-none
+            a.nav-link.dropdown-toggle(href="#" id="searchDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false")
+                i.fas.fa-search.fa-fw
+            
+            //- Dropdown - Search 
+            .dropdown-menu.dropdown-menu-right.p-3.shadow.animated--grow-in(aria-labelledby="searchDropdown")
+                form.form-inline.mr-auto.w-100.navbar-search
+                    .input-group
+                        input.form-control.bg-light.border-0.small(type="text" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2")
+                        .input-group-append
+                            button.btn.btn-primary(type="button")
+                                i.fas.fa-search.fa-sm
+
+        //- Location ([Future Endpoint Switch])
+        li.nav-item.dropdown.no-arrow.mx-1
+            a.nav-link(href="#" id="alertsDropdown" role="button" aria-haspopup="true" aria-expanded="false") Ottawa
+
+        //- Nav Item - Alerts 
+        li.nav-item.dropdown.no-arrow.mx-1
+            a.nav-link.dropdown-toggle(href="#" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false")
+                i.fas.fa-bell.fa-fw
+                //- Counter - Alerts 
+                span.badge.badge-danger.badge-counter #{alerts.length}
+
+            //- Dropdown - Alerts
+            .dropdown-list.dropdown-menu.dropdown-menu-right.shadow.animated--grow-i(aria-labelledby="alertsDropdown")
+                h6.dropdown-header Alerts Center
+                each alert in alerts
+                    a.dropdown-item.d-flex.align-items-center(href="#")
+                        .mr-3
+                            .icon-circle(class="bg-" + alert.status)
+                                i.fas.fa-donate.text-white
+                        div
+                            .small.text-gray-500 #{alert.time}
+                            = alert.text
+                a.dropdown-item.text-center.small.text-gray-500(href="#") Show All Alerts
+
+        //- Nav Item - Messages
+        li.nav-item.dropdown.no-arrow.mx-1
+            a.nav-link.dropdown-toggle(href="#" id="messagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false")
+                i.fas.fa-envelope.fa-fw                            
+                //- Counter - Messages
+                span.badge.badge-danger.badge-counter #{messages.length}
+
+            //- Dropdown - Messages
+            .dropdown-list.dropdown-menu.dropdown-menu-right.shadow.animated--grow-i(aria-labelledby="messagesDropdown")
+                h6.dropdown-header Message Center
+                each message in messages
+                    a.dropdown-item.d-flex.align-items-center(href=message.url)
+                        .dropdown-list-image.mr-3
+                            img.rounded-circle(src=message.img alt="")
+                            .status-indicator(class="bg-" + message.status)
+
+                        .font-weight-bold
+                            .text-truncate #{message.text}
+                            .small.text-gray-500  #{message.user} · #{message.timeAgo}
+
+                a.dropdown-item.text-center.small.text-gray-500(href="#") Read More Messages
+
+
+        .topbar-divider.d-none.d-sm-block
+
+        
+        //- Nav Item - User Information
+        li.nav-item.dropdown.no-arrow
+            if user
+                a.nav-link.dropdown-toggle(href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false")
+                    span.mr-2.d-none.d-lg-inline.text-gray-600.small.text-uppercase #{user.username}
+                    //- Login Icons
+                    if user.username == "admin"
+                        img.img-profile.rounded-circle(src="img/profile_icons/admin.png" width="60px" height="60px")
+                    else
+                        img.img-profile.rounded-circle(src="img/profile_icons/member.png" width="60px" height="60px")
+                
+                //- Dropdown - User Information
+                .dropdown-menu.dropdown-menu-right.shadow.animated--grow-in(aria-labelledby="userDropdown")
+                    a.dropdown-item(href="/profile")
+                        i.fas.fa-user.fa-sm.fa-fw.mr-2.text-gray-400 
+                        | Profile
+
+                    a.dropdown-item(href="/settings")
+                        i.fas.fa-cogs.fa-sm.fa-fw.mr-2.text-gray-400 
+                        | Settings
+                    
+                    a.dropdown-item(href="/logs")
+                        i.fas.fa-list.fa-sm.fa-fw.mr-2.text-gray-400 
+                        | Activity Log
+        
+                        .dropdown-divider
+
+                    a.dropdown-item(href="/logout" data-toggle="modal" data-target="#logoutModal")
+                        i.fas.fa-sign-out-alt.fa-sm.fa-fw.mr-2.text-gray-400 
+                        | Logout
+            else
+                a.nav-link(href="/login" role="button")
+                    span.mr-2.d-none.d-lg-inline.text-gray-600.small
+                        b Login  
+                

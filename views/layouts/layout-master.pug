@@ -1,0 +1,79 @@
+head
+    include layout-head
+
+body(id="page-top")
+
+    //- Page Wrapper 
+    div(id="wrapper")
+
+        //- Include Sidebar Template
+        include layout-side-navbar
+
+        //- Content Wrapper 
+        .d-flex.flex-column(id="content-wrapper")
+
+            //- Main Content 
+            div(id="content")
+
+                //- Include Top Navabar
+                include layout-top-navbar
+
+                //- Begin Page Content
+                .container-fluid
+
+                    //- Page Heading
+                    .d-sm-flex.align-items-center.mb-4
+                        h1.mr-auto.h3.mb-0.text-gray-800 #{pageTitle}
+                        //- Bug Report
+                        a.p-2.d-none.d-sm-inline.btn.btn-sm.btn-danger.shadow-sm.mr-2(href="/bug" alt="Report bug or feature")
+                            i.fas.fa-bug.fa-lg.text-white-50.align-right
+
+                        //- Report Button
+                        a.p-2.d-none.d-sm-inline.btn.btn-sm.btn-primary.shadow-sm(href="/report")
+                            i.fas.fa-flag.fa-sm.text-white-50.align-right
+                            |  New Report
+                            
+                    //- This is where page content will come in
+                    block content
+
+                //- /.container-fluid
+            //- End of Main Content
+
+            //- Footer
+            footer.sticky-footer.bg-white
+                .container.my-auto
+                    .copyright.text-center.my-auto
+                        span Made in Bayshore with ❤ &copy; Citizen IG 2020
+ 
+            //- End of Footer
+        //- End of Content Wrapper
+    //- End of Page Wrapper
+
+    //- Scroll to Top Button
+    a.scroll-to-top.rounded(href="#page-top")
+        i.fas.fa-angle-up
+
+    //- Logout Modal-->
+    .modal.fade(id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true")
+        .modal-dialog(role="document")
+            .modal-content
+                .modal-header
+                    h5.modal-title(id="exampleModalLabel") Ready to Leave?
+                    button.close(type="button" data-dismiss="modal" aria-label="Close")
+                        span(aria-hidden="true")
+                .modal-body
+                    p Select "Logout" below if you are ready to end your current session.
+                .modal-footer
+                    button.btn.btn-secondary(type="button" data-dismiss="modal") Cancel
+                    a.btn.btn-primary(href="/logout") Logout
+
+block scripts
+    //- Bootstrap core JavaScript-->
+    script(src="/vendor/jquery/jquery.min.js")
+    script(src="/vendor/bootstrap/js/bootstrap.bundle.min.js")
+
+    //- Core plugin JavaScript-->
+    script(src="/vendor/jquery-easing/jquery.easing.min.js")
+
+    //- Custom scripts for all pages-->
+    script(src="/js/sb-admin-2.min.js")
