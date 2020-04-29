@@ -9,7 +9,7 @@ if (MONGODB_URI) {
     const options = { useMongoClient: true };
     mongoose.connect(MONGODB_URI, options);
 
-} else if (NODE_ENV === 'development' || DB_USER === undefined) {
+} else if (NODE_ENV === 'dev' || DB_USER === undefined) {
     const uri = `mongodb://${DB_HOST}/test`
     const options = { useMongoClient: true };
     mongoose.connect(uri, options);

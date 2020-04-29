@@ -1,0 +1,17 @@
+extends ./layouts/layout-master
+
+block content
+  .row-auto
+    .card.shadow.mb-4
+      .card-header.py-3
+              h6.m-0.font-weight-bold.text-primary #{error.status}
+
+      .card-body
+        p= message
+
+        if error.stack
+          .row(style="margin-top:10x, font:0.25em")
+            .col
+              b Developer Stack Trace:
+              small 
+                pre #{error.stack}

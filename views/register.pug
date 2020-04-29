@@ -1,0 +1,47 @@
+extends layouts/layout-wo-menu
+
+block content
+    body.bg-gradient-primary
+        .container
+            //- Outer Row
+            .row.justify-content-center
+                .col-xl-10.col-lg-12.col-md-9
+                    .card.o-hidden.border-0.shadow-lg.my-5
+                        .card-body.p-0
+                        
+                            //- Nested Row within Card Body
+                            .row
+                                .col-lg-6.d-none.d-lg-block.bg-login-image
+                                .col-lg-6
+                                    .p-5
+                                        .text-center
+                                            h1.h4.text-gray-900.mb-4Forgot Create an Account!
+                                        
+                                        form(class="user")
+                                            .form-group.row                                            
+                                                .col-sm-6.mb-3.mb-sm-0
+                                                    input.form-control.form-control-user(type="text" id="1" name="fname" placeholder="First Name")
+                                            
+                                                .col-sm-6
+                                                    input.form-control.form-control-user(type="text" id="2" name="lname" placeholder="Last Name")
+
+                                            .form-group
+                                                input.form-control.form-control-user(type="email" id="3" name="email" placeholder="Email Address")
+                                            
+                                            .form-group.row                                            
+                                                .col-sm-6.mb-3.mb-sm-0
+                                                    input.form-control.form-control-user(type="password" id="1" name="password" placeholder="Password")
+                                            
+                                                .col-sm-6
+                                                    input.form-control.form-control-user(type="text" id="2" name="repeat-password" placeholder="Repeat Password")
+
+                                            .form-group.row                                            
+                                                .col-sm-4
+                                                    input.form-control.form-control-user(type="text" id="1" name="sponsor" placeholder="Sponsor ID")
+                                                .col-sm-8
+                                                    input.form-control.form-control-user(type="text" id="1" name="sponsor" placeholder="Sponsor Code")
+                                            
+                                            
+                                            button.btn.btn-primary.btn-user.btn-block(type="submit") Register Account
+
+                                        

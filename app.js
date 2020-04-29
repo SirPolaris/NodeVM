@@ -1,6 +1,5 @@
 var express = require("express");
 var path = require("path");
-var favicon = require("serve-favicon");
 var logger = require("morgan");
 var cookieParser = require("cookie-parser");
 var bodyParser = require("body-parser");
@@ -13,10 +12,6 @@ var LocalStrategy = require("passport-local").Strategy;
 
 // Routes
 var index = require("./routes/index");
-var admin = require("./routes/admin/index");
-var reportRoutes = require("./routes/report/index");
-var endpointRoutes = require("./routes/endpoint/index");
-var internal = require("./routes/internal/index");
 
 var app = express();
 
@@ -33,6 +28,7 @@ app.use(cookieParser());
 app.use(
   require("express-session")({
     secret: process.env.APP_SESSION_SECRET,
+    key: "sid",
     resave: false,
     saveUninitialized: false,
   })
@@ -44,25 +40,17 @@ app.use(passport.session()); // persistent login sessions
 
 // This Middleware allows serving of static files in Express
 app.use(express.static(path.join(__dirname, "public")));
-app.use(express.static(path.join(__dirname, "uploads")));
-
-// Favicon
-app.use(favicon(path.join(__dirname, "public", "favicon.ico")));
 
 // Sets up express.router to intercept all incoming traffic
 app.use("/", index);
-app.use("/admin", admin);
-app.use("/", reportRoutes);
-app.use("/", endpointRoutes);
-app.use("/", internal);
 
 // Passport config
-var Account = require("./models/accounts");
+var User = require("./models/user");
 // use static authenticate method of model in LocalStrategy
-passport.use(new LocalStrategy(Account.authenticate()));
+passport.use(new LocalStrategy(User.authenticate()));
 // use static serialize and deserialize of model for passport session support
-passport.serializeUser(Account.serializeUser());
-passport.deserializeUser(Account.deserializeUser());
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
@@ -105,7 +93,5 @@ fs.readdirSync(__dirname + "/models").forEach(function (filename) {
     require(__dirname + "/models/" + filename);
   }
 });
-
-require(__dirname + "/models/sr-types/srtype.js");
 
 module.exports = app;
