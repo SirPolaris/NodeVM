@@ -10,16 +10,6 @@ var Account = new Schema({
     password: {type: String},
     email: {type: String, lowercase: true, trim: true, unique: true},
     created: {type: Date, default: Date.now},
-    location: {
-       lat: {type: String},
-       lon: {type: String},
-       sdefID: {type: String},
-       sdefName: {type: String}
-    },
-    legalSignOffs:{
-       name: {type: String},
-       date: {type: Date}
-    }
 });
 
 Account.plugin(AutoIncrement, {inc_field: 'id'});
@@ -29,14 +19,14 @@ module.exports = mongoose.model('Account', Account);
 
 module.exports.getUserByUsername = function(username, callback){
     var query = {email: username};
-    User.findOne(query, callback);
+    Account.findOne(query, callback);
  }
  
  module.exports.getUserById = function(id, callback){   
-    User.findById(id, callback);
+   Account.findById(id, callback);
  }
  
  module.exports.comparePassword = function(candidatePassword, callback){
     var query = {password: candidatePassword};
-    User.findOne(query, callback);
+    Account.findOne(query, callback);
  }
